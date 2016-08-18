@@ -2,12 +2,12 @@
 <html>
 
 <head>
-  <title>simple.js - example - xtemplate@4.5.1</title>
+  <title>playground.js - example - xtemplate@4.6.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
+  <link href="https://a.alipayobjects.com/normalize.css/3.0.1/normalize.css" rel="stylesheet"/>
   <style>
     .highlight pre {
       padding: .8em 1em;
@@ -252,32 +252,82 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   <script src="https://a.alipayobjects.com/??es5-shim/4.0.5/es5-shim.js,es5-shim/4.0.5/es5-sham.js,html5shiv/3.7.2/src/html5shiv.js"></script>
   <![endif]-->
   
+  
 </head>
 
 <body>
-<div class="container">
-  <div class="header">
-    <h1>xtemplate@4.5.1</h1>
+  <div class="container">
+    <div class="header">
+      <h1>xtemplate@4.6.0</h1>
 
-    <p>High Speed, eXtensible Template Engine lib on browser and nodejs</p>
+      <p>High Speed, eXtensible Template Engine lib on browser and nodejs</p>
+    </div>
+    <div class="example" id="__react-content"></div>
+
+    <div class="highlight"><pre><code language="js"><span class="hljs-comment">/* eslint no-console:0 */</span>
+
+<span class="hljs-keyword">const</span> React = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react'</span>);
+<span class="hljs-keyword">const</span> ReactDOM = <span class="hljs-built_in">require</span>(<span class="hljs-string">'react-dom'</span>);
+<span class="hljs-keyword">const</span> XTemplate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'xtemplate'</span>);
+<span class="hljs-keyword">const</span> textareaStyle = {
+  width: <span class="hljs-number">600</span>,
+  height: <span class="hljs-number">200</span>,
+};
+<span class="hljs-keyword">const</span> labelStyle = {
+  display: <span class="hljs-string">'inline-block'</span>,
+  width: <span class="hljs-number">100</span>,
+};
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">start</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">let</span> data = {};
+  <span class="hljs-keyword">const</span> dataContent = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'data'</span>).value.trim();
+  <span class="hljs-keyword">if</span> (dataContent) {
+    data = <span class="hljs-built_in">JSON</span>.parse(dataContent);
+  }
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> XTemplate(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'template'</span>).value).render(data));
+}
+
+ReactDOM.render(
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span> <span class="hljs-attribute">margin:</span> <span class="hljs-attribute">10</span> }}&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span> <span class="hljs-attribute">marginBottom:</span> <span class="hljs-attribute">10</span> }}&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{labelStyle}</span>&gt;</span>
+      template:
+        <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">textarea</span>
+        <span class="hljs-attribute">style</span>=<span class="hljs-value">{textareaStyle}</span>
+        <span class="hljs-attribute">id</span>=<span class="hljs-value">"template"</span>
+        <span class="hljs-attribute">defaultValue</span>=<span class="hljs-value">{</span>
+          `<span class="hljs-attribute">Hello</span> {{<span class="hljs-attribute">world</span>}}!`
+        }
+      /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{{</span> <span class="hljs-attribute">marginBottom:</span> <span class="hljs-attribute">10</span> }}&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{labelStyle}</span>&gt;</span>
+      data(json):
+         <span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">textarea</span>
+        <span class="hljs-attribute">style</span>=<span class="hljs-value">{textareaStyle}</span>
+        <span class="hljs-attribute">id</span>=<span class="hljs-value">"data"</span>
+        <span class="hljs-attribute">defaultValue</span>=<span class="hljs-value">{</span>
+          `{ "<span class="hljs-attribute">world</span>"<span class="hljs-attribute">:</span> "<span class="hljs-attribute">world</span>"}`
+        }
+      /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{start}</span>&gt;</span>render to console<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>,
+  document.getElementById('__react-content')
+);
+</span></code></pre></div>
   </div>
-  <div class="example" id="__react-content"></div>
+  <a href="">
+    <img style="position: absolute; top: 0; right: 0; border: 0;"
+         src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
+         alt="Fork me on GitHub"
+         data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+  </a>
+  
   <script src="common.js?nowrap"></script>
-  <script src="simple.js?nowrap"></script>
-  <div class="highlight"><pre><code language="js"><span class="hljs-comment">/* eslint no-console:0 */</span>
-
-<span class="hljs-keyword">const</span> XTemplate = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../'</span>);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> XTemplate(<span class="hljs-string">'Hello {{world}}!'</span>).render({
-  world: <span class="hljs-string">'world'</span>,
-}));
-</code></pre></div>
-</div>
-<a href="">
-  <img style="position: absolute; top: 0; right: 0; border: 0;"
-       src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
-       alt="Fork me on GitHub"
-       data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
-</a>
+  <script src="playground.js?nowrap"></script>
 </body>
 
 </html>
